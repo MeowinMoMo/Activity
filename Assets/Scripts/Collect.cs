@@ -16,8 +16,19 @@ public class Collect : MonoBehaviour
             {
                 Collectables[i].transform.DOScale(Vector3.zero, 0.5f);
                 Collectables[i].transform.DOJump(transform.position,1,1, .15f).SetEase(Ease.Linear);
+                Invoke("DestroyObj", 10f);
             }
         }
+
     }
-    //Use Corountines or SystemThread or Invoke
+    //Use Corountines or SystemThread or Invoke to remove items from the List
+
+    private void DestroyObj()
+    {
+       foreach(GameObject food in Collectables)
+        {
+            Destroy(food);
+        }
+        Collectables.Clear();
+    }
 }
